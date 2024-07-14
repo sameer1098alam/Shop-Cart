@@ -1,0 +1,56 @@
+.checkoutPage {
+    background-color: #f8f9fa;
+    padding-bottom: 50px;
+}
+
+.accordion-item {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.accordion-button {
+    font-size: 1.25rem;
+    font-weight: bold;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.accordion-body {
+    padding: 1.5rem;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+hr {
+    border-top: 1px solid #dee2e6;
+    margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+    .accordion-button {
+        font-size: 1rem;
+    }
+
+    .accordion-body {
+        padding: 1rem;
+    }
+}
