@@ -1,13 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let allProducts = [];
+
     async function fetchProducts() {
         const response = await axios.get("https://fakestoreapi.com/products");
-        console.log(response.data);
-        return response.data;
+        allProducts = response.data;
+        console.log(allProducts);
+        populateProducts(allProducts);
     }
 
-    async function populateProducts() {
+    function populateProducts(products) {
         const productList = document.getElementById("productList");
-        const products = await fetchProducts();
+        productList.innerHTML = ""; // Clear previous products
         products.forEach(product => {
             const productItem = document.createElement("a");
             productItem.target = "_blank";
@@ -23,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             productPrice.classList.add("product-price", "text-center");
 
             productName.textContent = product.title.substring(0, 12) + "...";
-            productPrice.textContent = `&#8377; ${product.price}`;
+            productPrice.innerHTML = `&#8377; ${product.price}`;
 
             const imageInsideProductImage = document.createElement("img");
             imageInsideProductImage.src = product.image;
@@ -40,5 +43,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    populateProducts();
+    fetchProducts();
+
+    const filterSearch = document.getElementById("Search");
+    filterSearch.addEventListener("click", () => {
+        const minPrice = Number(document.getElementById("minPrice").value);
+        const maxPrice = Number(document.getElementById("maxPrice").value);
+
+        const filteredProducts = allProducts.filter(product => {
+            return product.price >= minPrice && product.price <= maxPrice;
+        });
+
+        populateProducts(filteredProducts);
+    });
+
+    const resetFilter = document.getElementById("clear");
+    resetFilter.addEventListener("click", () => {
+        document.getElementById("minPrice").value = '';
+        document.getElementById("maxPrice").value = '';
+        populateProducts(allProducts);
+    });
 });
